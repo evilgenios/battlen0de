@@ -1,0 +1,17 @@
+cryptography>=42
+protobuf>=7.35.1,<8
+python-dotenv>=1,<2
+requests>=2.31,<3
+
+# Stage 3: persistence + API
+sqlalchemy>=2,<3
+alembic>=1.13,<2
+psycopg[binary]>=3,<4
+fastapi>=0.110
+uvicorn[standard]>=0.29
+email-validator>=2
+
+# Testing
+pytest>=8
+pytest-timeout>=2.3
+httpx>=0.27

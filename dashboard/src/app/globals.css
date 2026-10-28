@@ -1,0 +1,262 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f4f7fb;
+  --surface: #ffffff;
+  --surface-muted: #eef3f9;
+  --surface-elevated: #ffffff;
+  --foreground: #0b1220;
+  --muted-foreground: #68758b;
+  --border: #dce5f0;
+  --accent: #5b5cf0;
+  --accent-2: #0ea5e9;
+  --accent-foreground: #ffffff;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --info: #0284c7;
+  --glow: rgba(91, 92, 240, 0.2);
+}
+
+.dark {
+  --background: #050812;
+  --surface: #0b1020;
+  --surface-muted: #11182a;
+  --surface-elevated: #10172a;
+  --foreground: #f7f9ff;
+  --muted-foreground: #8894ab;
+  --border: #1d2942;
+  --accent: #7c6cff;
+  --accent-2: #24c8ff;
+  --accent-foreground: #ffffff;
+  --success: #58e391;
+  --warning: #f6be58;
+  --danger: #ff6e7a;
+  --info: #45c9ff;
+  --glow: rgba(124, 108, 255, 0.28);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  background: var(--color-background);
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% -10%, color-mix(in srgb, var(--color-accent) 8%, transparent), transparent 34rem),
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--color-info) 7%, transparent), transparent 32rem),
+    var(--color-background);
+  color: var(--color-foreground);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-accent) 34%, transparent);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(0.5rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.toast-enter { animation: toast-in 180ms ease-out; }
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-surface-muted);
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-foreground) 7%, transparent), transparent);
+  animation: shimmer 1.6s infinite;
+}
+
+@keyframes warpath-star-twinkle {
+  0%, 100% { opacity: 0.12; transform: scale(0.8); }
+  50% { opacity: 0.78; transform: scale(1.2); }
+}
+
+@keyframes warpath-particle-drift {
+  0% { transform: translate3d(0, 10vh, 0); opacity: 0; }
+  12% { opacity: 0.48; }
+  85% { opacity: 0.28; }
+  100% { transform: translate3d(1.5rem, -105vh, 0); opacity: 0; }
+}
+
+@keyframes warpath-radar-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes warpath-grid-drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(56px, 56px, 0); }
+}
+
+@keyframes warpath-aurora {
+  0%, 100% { transform: translate3d(-8%, -4%, 0) scale(1); opacity: 0.5; }
+  50% { transform: translate3d(8%, 6%, 0) scale(1.12); opacity: 0.8; }
+}
+
+@keyframes premium-scan {
+  0% { transform: translateY(-120%); opacity: 0; }
+  12% { opacity: 0.55; }
+  70% { opacity: 0.16; }
+  100% { transform: translateY(520%); opacity: 0; }
+}
+
+@keyframes premium-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-success) 28%, transparent); }
+  50% { box-shadow: 0 0 0 6px transparent; }
+}
+
+.premium-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-border) 86%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface-elevated) 94%, transparent), color-mix(in srgb, var(--color-surface) 98%, transparent));
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 6%, transparent) inset,
+    0 18px 50px color-mix(in srgb, #020617 8%, transparent);
+}
+
+.dark .premium-panel {
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.045) inset,
+    0 24px 70px rgba(0,0,0,0.24);
+}
+
+.premium-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 42%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-info), transparent);
+  opacity: 0.7;
+}
+
+.premium-glass {
+  background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.premium-lift {
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.premium-lift:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--color-accent) 42%, var(--color-border));
+  box-shadow: 0 20px 60px color-mix(in srgb, var(--color-accent) 10%, transparent);
+}
+
+.command-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-geist-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.command-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 9999px;
+  background: currentColor;
+  box-shadow: 0 0 16px currentColor;
+}
+
+.live-dot {
+  animation: premium-pulse 2.2s ease-in-out infinite;
+}
+
+.command-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 14% 0%, color-mix(in srgb, var(--color-accent) 20%, transparent), transparent 26rem),
+    radial-gradient(circle at 95% 70%, color-mix(in srgb, var(--color-info) 12%, transparent), transparent 24rem),
+    linear-gradient(145deg, color-mix(in srgb, var(--color-surface-elevated) 96%, transparent), color-mix(in srgb, var(--color-surface) 98%, transparent));
+}
+
+.command-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--color-foreground) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--color-foreground) 4%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to right, rgba(0,0,0,.8), transparent 72%);
+}
+
+.data-chip {
+  border: 1px solid color-mix(in srgb, var(--color-border) 80%, transparent);
+  background: color-mix(in srgb, var(--color-surface-muted) 62%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, white 4%, transparent) inset;
+}
+
+.scan-line {
+  position: absolute;
+  inset: 0;
+  height: 20%;
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--color-info) 8%, transparent), transparent);
+  pointer-events: none;
+  animation: premium-scan 8s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-lift,
+  .live-dot,
+  .scan-line {
+    animation: none !important;
+    transition: none !important;
+  }
+  .premium-lift:hover { transform: none; }
+}
+
+@keyframes premium-reveal {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
